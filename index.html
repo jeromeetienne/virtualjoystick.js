@@ -11,6 +11,20 @@
 			background-color: #BBB;
 			-webkit-user-select	: none;
 		}
+		#info {
+			position	: absolute;
+			top		: 0px;
+			width		: 100%;
+			padding		: 5px;
+			text-align	: center;
+		}
+		#info a {
+			color		: #66F;
+			text-decoration	: none;
+		}
+		#info a:hover {
+			text-decoration	: underline;
+		}
 		#container {
 			width	: 100%;
 			height	: 100%;
@@ -19,10 +33,24 @@
 	</head>
 	<body>
 		<div id="container"></div>
-		<script src="../virtualjoystick.js"></script>
+		<div id="info">
+			<a href="https://github.com/jeromeetienne/virtualjoystick.js" target="_blank">VirtualJoystick.js</a>
+			A library javascript to provide a virtual joystick on touchscreen.
+			-
+			inspired by this
+			<a href="http://sebleedelisle.com/2011/04/multi-touch-game-controller-in-javascripthtml5-for-ipad/">post</a>
+			from
+			<a href="http://sebleedelisle.com/">seb.ly</a>
+			<br/>
+			Touch the screen and move
+			-
+			works with mouse too as debug
+		</div> 
+		<script src="virtualjoystick.js"></script>
 		<script>
 			var joystick	= new VirtualJoystick({
-				container	: document.getElementById('container')
+				container	: document.getElementById('container'),
+				debug		: true
 			});
 		</script>
 	</body>

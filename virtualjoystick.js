@@ -4,7 +4,7 @@ var VirtualJoystick	= function(opts)
 	this._container	= opts.container	|| document.body;
 	this._stickEl	= opts.stickElement	|| this._buildJoystickStick();
 	this._baseEl	= opts.baseElement	|| this._buildJoystickBase();
-	this._debug	= opts.debug		|| true;
+	this._debug	= opts.debug		|| false;
 
 	this._container.style.position	= "relative";
 
