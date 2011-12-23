@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		
+		<style>
+		body {
+			overflow	: hidden;
+			padding		: 0;
+			margin		: 0;
+			background-color: #BBB;
+			-webkit-user-select	: none;
+		}
+		#container {
+			width	: 100%;
+			height	: 100%;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script src="../virtualjoystick.js"></script>
+		<script>
+			var joystick	= new VirtualJoystick({
+				container	: document.getElementById('container')
+			});
+		</script>
+	</body>
+</html>
