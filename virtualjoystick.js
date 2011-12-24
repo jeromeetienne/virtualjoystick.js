@@ -16,6 +16,8 @@ var VirtualJoystick	= function(opts)
 	this._stickEl.style.position	= "absolute"
 	this._stickEl.style.display	= "none";
 
+
+	// TODO push the debug elsewhere
 	if( this._debug ){
 		this._debugEl	= document.createElement( 'span' );
 		this._container.appendChild(this._debugEl);
