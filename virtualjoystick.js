@@ -1,10 +1,11 @@
 var VirtualJoystick	= function(opts)
 {
-	opts		= opts			|| {};
-	this._container	= opts.container	|| document.body;
-	this._stickEl	= opts.stickElement	|| this._buildJoystickStick();
-	this._baseEl	= opts.baseElement	|| this._buildJoystickBase();
-	this._debug	= opts.debug		|| false;
+	opts			= opts			|| {};
+	this._container		= opts.container	|| document.body;
+	this._stickEl		= opts.stickElement	|| this._buildJoystickStick();
+	this._baseEl		= opts.baseElement	|| this._buildJoystickBase();
+	this._debug		= opts.debug		|| false;
+	this._mouseSupport	= 'mouseSupport' in opts ? opts.mouseSupport : false;
 
 	this._container.style.position	= "relative";
 
@@ -32,28 +33,32 @@ var VirtualJoystick	= function(opts)
 	this._stickY	= 0;
 
 	__bind		= function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-	this._$onMouseDown	= __bind(this._onMouseDown	, this);
-	this._$onMouseUp	= __bind(this._onMouseUp	, this);
-	this._$onMouseMove	= __bind(this._onMouseMove	, this);
 	this._$onTouchStart	= __bind(this._onTouchStart	, this);
 	this._$onTouchEnd	= __bind(this._onTouchEnd	, this);
 	this._$onTouchMove	= __bind(this._onTouchMove	, this);
-	this._container.addEventListener( 'mousedown'	, this._$onMouseDown	, false );
-	this._container.addEventListener( 'mouseup'	, this._$onMouseUp	, false );
-	this._container.addEventListener( 'mousemove'	, this._$onMouseMove	, false );
 	this._container.addEventListener( 'touchstart'	, this._$onTouchStart	, false );
 	this._container.addEventListener( 'touchend'	, this._$onTouchEnd	, false );
 	this._container.addEventListener( 'touchmove'	, this._$onTouchMove	, false );
+	if( this._mouseSupport ){
+		this._$onMouseDown	= __bind(this._onMouseDown	, this);
+		this._$onMouseUp	= __bind(this._onMouseUp	, this);
+		this._$onMouseMove	= __bind(this._onMouseMove	, this);
+		this._container.addEventListener( 'mousedown'	, this._$onMouseDown	, false );
+		this._container.addEventListener( 'mouseup'	, this._$onMouseUp	, false );
+		this._container.addEventListener( 'mousemove'	, this._$onMouseMove	, false );
+	}
 }
 
 VirtualJoystick.prototype.destroy	= function()
 {
-	this._container.removeEventListener( 'mouseup'		, this._$onMouseUp	, false );
-	this._container.removeEventListener( 'mousedown'	, this._$onMouseDown	, false );
-	this._container.removeEventListener( 'mousemove'	, this._$onMouseMove	, false );
 	this._container.removeEventListener( 'touchstart'	, this._$onTouchStart	, false );
 	this._container.removeEventListener( 'touchend'		, this._$onTouchEnd	, false );
 	this._container.removeEventListener( 'touchmove'	, this._$onTouchMove	, false );
+	if( this._mouseSupport ){
+		this._container.removeEventListener( 'mouseup'		, this._$onMouseUp	, false );
+		this._container.removeEventListener( 'mousedown'	, this._$onMouseDown	, false );
+		this._container.removeEventListener( 'mousemove'	, this._$onMouseMove	, false );
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -146,11 +151,13 @@ VirtualJoystick.prototype._onMove	= function(x, y)
 		this._stickY	= y;
 		this._stickEl.style.left	= (x - this._stickEl.width /2)+"px";
 		this._stickEl.style.top		= (y - this._stickEl.height/2)+"px";
-		this._debugEl.innerHTML		= this.deltaX() + ' ' + this.deltaY()
-					+ (this.right()	? ' right'	: '')
-					+ (this.up()	? ' up'		: '')
-					+ (this.left()	? ' left'	: '')
-					+ (this.down()	? ' down' 	: '');
+		if( this._debugEl ){
+			this._debugEl.innerHTML	= this.deltaX() + ' ' + this.deltaY()
+				+ (this.right()	? ' right'	: '')
+				+ (this.up()	? ' up'		: '')
+				+ (this.left()	? ' left'	: '')
+				+ (this.down()	? ' down' 	: '');			
+		}
 	}
 }
 
