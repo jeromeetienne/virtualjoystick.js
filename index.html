@@ -45,14 +45,27 @@
 			Touch the screen and move
 			-
 			works with mouse too as debug
+			<br/>
+			<span id="result"></span>
 		</div> 
 		<script src="virtualjoystick.js"></script>
 		<script>
 			var joystick	= new VirtualJoystick({
 				container	: document.getElementById('container'),
-				debug		: false,
 				mouseSupport	: true
 			});
+			setInterval(function(){
+				console.log("kk")
+				var outputEl	= document.getElementById('result');
+				outputEl.innerHTML	= '<b>Result:</b> '
+					+ ' dx:'+joystick.deltaX()
+					+ ' dy:'+joystick.deltaY()
+					+ (joystick.right()	? ' right'	: '')
+					+ (joystick.up()	? ' up'		: '')
+					+ (joystick.left()	? ' left'	: '')
+					+ (joystick.down()	? ' down' 	: '');		
+
+			}, 1/30 * 1000);
 		</script>
 	</body>
 </html>
