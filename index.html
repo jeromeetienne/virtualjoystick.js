@@ -9,7 +9,6 @@
 			padding		: 0;
 			margin		: 0;
 			background-color: #BBB;
-			-webkit-user-select	: none;
 		}
 		#info {
 			position	: absolute;
@@ -26,15 +25,20 @@
 			text-decoration	: underline;
 		}
 		#container {
-			width	: 100%;
-			height	: 100%;
+			width		: 100%;
+			height		: 100%;
+			overflow	: hidden;
+			padding		: 0;
+			margin		: 0;
+			-webkit-user-select	: none;
+			-moz-user-select	: none;
 		}
 		</style>
 	</head>
 	<body>
 		<div id="container"></div>
 		<div id="info">
-			<a href="https://github.com/jeromeetienne/virtualjoystick.js" target="_blank">VirtualJoystick.js</a>
+			<a href="http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/" target="_blank">VirtualJoystick.js</a>
 			A library javascript to provide a virtual joystick on touchscreen.
 			-
 			inspired by this
