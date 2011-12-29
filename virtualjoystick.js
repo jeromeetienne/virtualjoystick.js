@@ -55,6 +55,14 @@ VirtualJoystick.prototype.destroy	= function()
 	}
 }
 
+/**
+ * @returns {Boolean} true if touchscreen is currently available, false otherwise
+*/
+VirtualJoystick.touchScreenAvailable	= function()
+{
+	return 'createTouch' in document ? true : false;
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 //										//
 //////////////////////////////////////////////////////////////////////////////////
