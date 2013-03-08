@@ -4,8 +4,7 @@ var VirtualJoystick	= function(opts)
 	this._container		= opts.container	|| document.body;
 	this._stickEl		= opts.stickElement	|| this._buildJoystickStick();
 	this._baseEl		= opts.baseElement	|| this._buildJoystickBase();
-	this._mouseSupport	= 'mouseSupport' in opts? opts.mouseSupport	: false;
-	this._range		= opts.range		|| 60;
+	this._mouseSupport	= opts.mouseSupport !== undefined ? opts.mouseSupport : false;
 
 	this._container.style.position	= "relative";
 
@@ -23,7 +22,7 @@ var VirtualJoystick	= function(opts)
 	this._stickX	= 0;
 	this._stickY	= 0;
 
-	__bind		= function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+	var __bind	= function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 	this._$onTouchStart	= __bind(this._onTouchStart	, this);
 	this._$onTouchEnd	= __bind(this._onTouchEnd	, this);
 	this._$onTouchMove	= __bind(this._onTouchMove	, this);
@@ -74,40 +73,32 @@ VirtualJoystick.prototype.up	= function(){
 	if( this._pressed === false )	return false;
 	var deltaX	= this.deltaX();
 	var deltaY	= this.deltaY();
-	if( deltaY >= 0 )	return false;
-	if( Math.abs(deltaY) < this._range && Math.abs(deltaY) < Math.abs(deltaX) ){
-		return false;
-	}
+	if( deltaY >= 0 )				return false;
+	if( Math.abs(deltaX) > 2*Math.abs(deltaY) )	return false;
 	return true;
 }
 VirtualJoystick.prototype.down	= function(){
 	if( this._pressed === false )	return false;
 	var deltaX	= this.deltaX();
 	var deltaY	= this.deltaY();
-	if( deltaY <= 0 )	return false;
-	if( Math.abs(deltaY) < this._range && Math.abs(deltaY) < Math.abs(deltaX) ){
-		return false;
-	}
+	if( deltaY <= 0 )				return false;
+	if( Math.abs(deltaX) > 2*Math.abs(deltaY) )	return false;
 	return true;	
 }
 VirtualJoystick.prototype.right	= function(){
 	if( this._pressed === false )	return false;
 	var deltaX	= this.deltaX();
 	var deltaY	= this.deltaY();
-	if( deltaX <= 0 )	return false;
-	if( Math.abs(deltaX) < this._range && Math.abs(deltaY) > Math.abs(deltaX) ){
-		return false;
-	}
+	if( deltaX <= 0 )				return false;
+	if( Math.abs(deltaY) > 2*Math.abs(deltaX) )	return false;
 	return true;	
 }
 VirtualJoystick.prototype.left	= function(){
 	if( this._pressed === false )	return false;
 	var deltaX	= this.deltaX();
 	var deltaY	= this.deltaY();
-	if( deltaX >= 0 )	return false;
-	if( Math.abs(deltaX) < this._range && Math.abs(deltaY) > Math.abs(deltaX) ){
-		return false;
-	}
+	if( deltaX >= 0 )				return false;
+	if( Math.abs(deltaY) > 2*Math.abs(deltaX) )	return false;
 	return true;	
 }
 
