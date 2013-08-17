@@ -10,7 +10,7 @@ and its
 [source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/dual.html).
 
 see ["Let’s Make a 3D Game: Virtual Joystick"](http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/)
-on 
+post on 
 ["learningthreejs blog"](http://learningthreejs.com).
 
 How To Install It
