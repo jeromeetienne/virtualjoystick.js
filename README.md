@@ -1,4 +1,39 @@
-a virtual joystick for touchscreen.
+virtualjoystick.js
+==================
+
+It is small library to emulate a virtual joystick for touchscreen.
+
+Here is a [basic example](http://jeromeetienne.github.io/virtualjoystick.js/index.html)
+and its
+[source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/index.html).
+Here is a [dual joystick example](http://jeromeetienne.github.io/virtualjoystick.js/dual.html)
+and its
+[source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/dual.html).
+
+How To Install It
+=================
+
+You can install it manually. Just do 
+
+```html
+<script src='virtualjoystick.js'></script>
+```
+
+You can install with [bower](http://bower.io/).
+
+```bash
+bower install threex.depthoffield
+```
+
+then you add that in your html
+
+```html
+<script src="bower_components/virtualjoystick.js/virtualjoystick.js"></script>
+```
+
+
+How To Use It ?
+===============
 
 * ```opts.container``` is the
 [dom element](https://developer.mozilla.org/en/DOM/element)
