@@ -2,7 +2,6 @@ virtualjoystick.js
 ==================
 
 It is small library to emulate a virtual joystick for touchscreen.
-
 Here is a [basic example](http://jeromeetienne.github.io/virtualjoystick.js/index.html)
 and its
 [source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/index.html).
