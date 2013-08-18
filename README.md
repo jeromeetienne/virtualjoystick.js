@@ -25,7 +25,7 @@ You can install it manually. Just do
 You can install with [bower](http://bower.io/).
 
 ```bash
-bower install threex.depthoffield
+bower install virtualjoystick.js
 ```
 
 then you add that in your html
