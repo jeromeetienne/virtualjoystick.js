@@ -331,8 +331,8 @@ VirtualJoystick.prototype._move = function(style, x, y)
       style[this._transform] = 'translate(' + x + 'px,' + y + 'px)';
     }
   } else {
-    style.left = x;
-    style.top = y;
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
   }
 }
 
