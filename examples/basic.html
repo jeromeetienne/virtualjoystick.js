@@ -52,12 +52,15 @@
 			<br/>
 			<span id="result"></span>
 		</div> 
-		<script src="virtualjoystick.js"></script>
+		<script src="../virtualjoystick.js"></script>
 		<script>
 			console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
 			var joystick	= new VirtualJoystick({
 				container	: document.getElementById('container'),
-				mouseSupport	: true
+				mouseSupport	: true,
+				stationaryBase	: false,
+				baseX		: 100,
+				baseY		: 100,				
 			});
 			setInterval(function(){
 				var outputEl	= document.getElementById('result');

@@ -2,19 +2,21 @@ virtualjoystick.js
 ==================
 
 It is small library to emulate a virtual joystick for touchscreen.
-Here is a [basic example](http://jeromeetienne.github.io/virtualjoystick.js/index.html)
-and its
-[source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/index.html).
-Here is a [dual joystick example](http://jeromeetienne.github.io/virtualjoystick.js/dual.html)
-and its
-[source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/dual.html).
-And here is a [Stationary-Base joystick example](http://jeromeetienne.github.io/virtualjoystick.js/StationaryBaseDemo.html)
-and its
-[source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/js/StationaryBaseDemo.js).
-
-see ["Let’s Make a 3D Game: Virtual Joystick"](http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/)
+For details, see ["Let’s Make a 3D Game: Virtual Joystick"](http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/)
 post on 
 ["learningthreejs blog"](http://learningthreejs.com).
+
+Show Don't Tell
+===============
+* [examples/basic.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/basic.html)
+\[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/basic.html)\] :
+It shows a basic usage of the library.
+* [examples/dual.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/dual.html)
+\[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/dual.html)\] :
+It shows how to have multiple virtual joystick on the same page
+* [examples/stationarybase.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/stationarybase.html)
+\[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/stationarybase.html)\] :
+It shows how to have multiple virtual joystick on the same page
 
 How To Install It
 =================
