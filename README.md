@@ -16,7 +16,7 @@ It shows a basic usage of the library.
 It shows how to have multiple virtual joystick on the same page
 * [examples/stationarybase.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/stationarybase.html)
 \[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/stationarybase.html)\] :
-It shows how to have multiple virtual joystick on the same page
+It shows how to have a stationary base. by @erichlof
 
 How To Install It
 =================
