@@ -9,6 +9,8 @@ var VirtualJoystick	= function(opts)
 	this._stationaryBase = opts.stationaryBase || false;
 	this._baseX = this._stickX = opts.baseX || 0;
 	this._baseY = this._stickY = opts.baseY || 0;
+	this._limitStickTravel = opts.limitStickTravel || false;
+	this._stickRadius = opts.stickRadius || 100;
 
 	this._container.style.position	= "relative";
 
@@ -165,8 +167,22 @@ VirtualJoystick.prototype._onDown	= function(x, y)
 		this._baseEl.style.display	= "";
 		this._move(this._baseEl.style, (this._baseX - this._baseEl.width /2), (this._baseY - this._baseEl.height/2));
 	}
+	
 	this._stickX	= x;
 	this._stickY	= y;
+	
+	if(this._limitStickTravel === true){
+		var deltaX	= this.deltaX();
+		var deltaY	= this.deltaY();
+		var stickDistance = Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY) );
+		if(stickDistance > this._stickRadius){
+			var stickNormalizedX = deltaX / stickDistance;
+			var stickNormalizedY = deltaY / stickDistance;
+			
+			this._stickX = stickNormalizedX * this._stickRadius + this._baseX;
+			this._stickY = stickNormalizedY * this._stickRadius + this._baseY;
+		} 	
+	}
 	
 	this._stickEl.style.display	= "";
     this._move(this._stickEl.style, (this._stickX - this._stickEl.width /2), (this._stickY - this._stickEl.height/2));	
@@ -177,6 +193,20 @@ VirtualJoystick.prototype._onMove	= function(x, y)
 	if( this._pressed === true ){
 		this._stickX	= x;
 		this._stickY	= y;
+		
+		if(this._limitStickTravel === true){
+			var deltaX	= this.deltaX();
+			var deltaY	= this.deltaY();
+			var stickDistance = Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY) );
+			if(stickDistance > this._stickRadius){
+				var stickNormalizedX = deltaX / stickDistance;
+				var stickNormalizedY = deltaY / stickDistance;
+			
+				this._stickX = stickNormalizedX * this._stickRadius + this._baseX;
+				this._stickY = stickNormalizedY * this._stickRadius + this._baseY;
+			} 		
+		}
+		
         this._move(this._stickEl.style, (this._stickX - this._stickEl.width /2), (this._stickY - this._stickEl.height/2));	
 	}	
 }
@@ -381,5 +411,3 @@ VirtualJoystick.prototype._check3D = function()
     var exports = null != val && val.length && 'none' != val;
     return exports;
 }
-
-
