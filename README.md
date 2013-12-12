@@ -23,6 +23,7 @@ It shows how to limit the distance that the stick can travel from its base. by [
 * [examples/limitsticktraveldemostationarybase.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/LimitStickTravelDemoStationaryBase.html)
 \[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/LimitStickTravelDemoStationaryBase.html)\] :
 Limited Stick (same as above), but with Stationary Base. by [@erichlof](https://github.com/erichlof)
+
 How To Install It
 =================
 
