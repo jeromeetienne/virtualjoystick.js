@@ -17,10 +17,10 @@ It shows how to have multiple virtual joystick on the same page
 * [examples/stationarybase.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/stationarybase.html)
 \[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/stationarybase.html)\] :
 It shows how to have a stationary base. by [@erichlof](https://github.com/erichlof)
-* [examples/limitsticktraveldemo.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/LimitStickTravelDemo.html)
+* [examples/LimitStickTravelDemo.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/LimitStickTravelDemo.html)
 \[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/LimitStickTravelDemo.html)\] :
 It shows how to limit the distance that the stick can travel from its base. by [@erichlof](https://github.com/erichlof)
-* [examples/limitsticktraveldemostationarybase.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/LimitStickTravelDemoStationaryBase.html)
+* [examples/LimitStickTravelDemoStationaryBase.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/LimitStickTravelDemoStationaryBase.html)
 \[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/LimitStickTravelDemoStationaryBase.html)\] :
 Limited Stick (same as above), but with Stationary Base. by [@erichlof](https://github.com/erichlof)
 
