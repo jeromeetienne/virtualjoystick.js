@@ -17,6 +17,12 @@ It shows how to have multiple virtual joystick on the same page
 * [examples/stationarybase.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/stationarybase.html)
 \[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/stationarybase.html)\] :
 It shows how to have a stationary base. by [@erichlof](https://github.com/erichlof)
+* [examples/LimitStickTravelDemo.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/LimitStickTravelDemo.html)
+\[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/LimitStickTravelDemo.html)\] :
+It shows how to limit the distance that the stick can travel from its base. by [@erichlof](https://github.com/erichlof)
+* [examples/LimitStickTravelDemoStationaryBase.html](http://jeromeetienne.github.io/virtualjoystick.js/examples/LimitStickTravelDemoStationaryBase.html)
+\[[view source](https://github.com/jeromeetienne/virtualjoystick.js/blob/master/examples/LimitStickTravelDemoStationaryBase.html)\] :
+Limited Stick (same as above), but with Stationary Base. by [@erichlof](https://github.com/erichlof)
 
 How To Install It
 =================
@@ -56,4 +62,5 @@ which is display for its *base*.
 * you may set ```opts.mouseSupport``` to true during debug.
 * you may set ```opts.stationaryBase``` to true for a permanent Stationary joystick base.
 * if you do use a stationary base, you must also set ```opts.baseX``` to the desired X-coordinate on the webpage and ```opts.baseY``` to the desired Y-coordinate.  The joystick base will now be fixed at this location.
-
+* you may set ```opts.limitStickTravel``` to true in order to limit the distance that the stick can travel from its base.  This will create an invisible circle barrier that the stick cannot leave. 
+* if you do use ```opts.limitStickTravel``` , you can also set ```opts.stickRadius``` to the desired radius (in pixels).  The stick will now be confined to stickRadius.  If you do not set ```opts.stickRadius``` , it will default to 100 pixels radius.
