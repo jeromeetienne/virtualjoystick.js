@@ -6,33 +6,34 @@ var VirtualJoystick	= function(opts)
 	this._stickEl		= opts.stickElement	|| this._buildJoystickStick();
 	this._baseEl		= opts.baseElement	|| this._buildJoystickBase();
 	this._mouseSupport	= opts.mouseSupport !== undefined ? opts.mouseSupport : false;
-	this._stationaryBase = opts.stationaryBase || false;
-	this._baseX = this._stickX = opts.baseX || 0;
-	this._baseY = this._stickY = opts.baseY || 0;
-	this._limitStickTravel = opts.limitStickTravel || false;
-	this._stickRadius = opts.stickRadius || 100;
+	this._stationaryBase	= opts.stationaryBase || false;
+	this._baseX		= this._stickX = opts.baseX || 0
+	this._baseY		= this._stickY = opts.baseY || 0
+	this._limitStickTravel	= opts.limitStickTravel || false
+	this._stickRadius	= opts.stickRadius !== undefined ? opts.stickRadius : 100
 
-	this._container.style.position	= "relative";
+	this._container.style.position	= "relative"
 
-	this._container.appendChild(this._baseEl);
+	this._container.appendChild(this._baseEl)
 	this._baseEl.style.position	= "absolute"
-	this._baseEl.style.display	= "none";
+	this._baseEl.style.display	= "none"
 	
-	this._container.appendChild(this._stickEl);
+	this._container.appendChild(this._stickEl)
 	this._stickEl.style.position	= "absolute"
-	this._stickEl.style.display	= "none";
-	
+	this._stickEl.style.display	= "none"
+
 	this._pressed	= false;
 	this._touchIdx	= null;
 	
-	if(this._stationaryBase == true){
+	if(this._stationaryBase === true){
 		this._baseEl.style.display	= "";
 		this._baseEl.style.left		= (this._baseX - this._baseEl.width /2)+"px";
 		this._baseEl.style.top		= (this._baseY - this._baseEl.height/2)+"px";
 	}
     
-    this._transform = (opts.useCssTransform !== undefined ? opts.useCssTransform : true) ? this._getTransformProperty() : false;
-    this._has3d = this._check3D();
+	this._transform = (opts.useCssTransform !== undefined ? opts.useCssTransform : true) ? this._getTransformProperty() : false;
+	this._has3d = this._check3D();
+	
 	
 	var __bind	= function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 	this._$onTouchStart	= __bind(this._onTouchStart	, this);
@@ -207,7 +208,7 @@ VirtualJoystick.prototype._onMove	= function(x, y)
 			} 		
 		}
 		
-        this._move(this._stickEl.style, (this._stickX - this._stickEl.width /2), (this._stickY - this._stickEl.height/2));	
+        	this._move(this._stickEl.style, (this._stickX - this._stickEl.width /2), (this._stickY - this._stickEl.height/2));	
 	}	
 }
 
@@ -247,6 +248,9 @@ VirtualJoystick.prototype._onTouchStart	= function(event)
 	// notify event for validation
 	var isValid	= this.dispatchEvent('touchStartValidation', event);
 	if( isValid === false )	return;
+	
+	// dispatch touchStart
+	this.dispatchEvent('touchStart', event);
 
 	event.preventDefault();
 	// get the first who changed
@@ -264,6 +268,9 @@ VirtualJoystick.prototype._onTouchEnd	= function(event)
 {
 	// if there is no touch in progress, do nothing
 	if( this._touchIdx === null )	return;
+
+	// dispatch touchEnd
+	this.dispatchEvent('touchEnd', event);
 
 	// try to find our touch event
 	var touchList	= event.changedTouches;

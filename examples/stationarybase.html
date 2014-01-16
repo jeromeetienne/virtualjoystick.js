@@ -32,10 +32,10 @@ Debug Info
 
 	var keyboard = new THREEx.KeyboardState();
 	var joystick = new VirtualJoystick({
-		mouseSupport: true,
-		stationaryBase: true,
-		baseX: 200,
-		baseY: 200
+		mouseSupport	: true,
+		stationaryBase	: true,
+		baseX		: 200,
+		baseY		: 200
 	});
 
 	var renderer = new THREE.WebGLRenderer();
@@ -133,8 +133,8 @@ Debug Info
 
 
 	function onWindowResize(){
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight );   
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize( window.innerWidth, window.innerHeight );   
 	}		
 </script></body>

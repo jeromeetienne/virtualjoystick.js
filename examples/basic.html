@@ -55,13 +55,18 @@
 		<script src="../virtualjoystick.js"></script>
 		<script>
 			console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
+	
 			var joystick	= new VirtualJoystick({
 				container	: document.getElementById('container'),
 				mouseSupport	: true,
-				stationaryBase	: false,
-				baseX		: 100,
-				baseY		: 100,				
 			});
+			joystick.addEventListener('touchStart', function(){
+				console.log('down')
+			})
+			joystick.addEventListener('touchEnd', function(){
+				console.log('up')
+			})
+
 			setInterval(function(){
 				var outputEl	= document.getElementById('result');
 				outputEl.innerHTML	= '<b>Result:</b> '
@@ -70,8 +75,7 @@
 					+ (joystick.right()	? ' right'	: '')
 					+ (joystick.up()	? ' up'		: '')
 					+ (joystick.left()	? ' left'	: '')
-					+ (joystick.down()	? ' down' 	: '');		
-
+					+ (joystick.down()	? ' down' 	: '')	
 			}, 1/30 * 1000);
 		</script>
 	</body>

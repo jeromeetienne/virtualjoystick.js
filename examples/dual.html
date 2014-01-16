@@ -6,7 +6,7 @@
 	// 
 	var joystick	= new VirtualJoystick({
 		container	: document.body,
-		strokeStyle	: 'cyan'
+		strokeStyle	: 'cyan',
 	});
 	joystick.addEventListener('touchStartValidation', function(event){
 		var touch	= event.changedTouches[0];
@@ -17,12 +17,17 @@
 	// one on the right of the screen
 	var joystick	= new VirtualJoystick({
 		container	: document.body,
-		strokeStyle	: 'orange'
+		strokeStyle	: 'orange',
+		limitStickTravel: true,
+		stickRadius	: 0		
 	});
 	joystick.addEventListener('touchStartValidation', function(event){
 		var touch	= event.changedTouches[0];
 		if( touch.pageX >= window.innerWidth/2 )	return false;
 		return true
 	});
+	joystick.addEventListener('touchStart', function(){
+		console.log('down')
+	})
 </script></body>
 </html>
