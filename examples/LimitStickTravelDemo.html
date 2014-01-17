@@ -68,21 +68,21 @@
 		frameTime = clock.getDelta();
 
 		if(sunRiseFlag == true){
-		sunHeight = sunHeight + 60 * frameTime;
+			sunHeight = sunHeight + 60 * frameTime;
 		}
 
 		if(sunRiseFlag == false){
-		sunHeight = sunHeight - 60 * frameTime;
+			sunHeight = sunHeight - 60 * frameTime;
 		}
 
 		if(sunHeight > 150){
-		sunHeight = 150;
-		sunRiseFlag = false;
+			sunHeight = 150;
+			sunRiseFlag = false;
 		}
 
 		if(sunHeight < 0){
-		sunHeight = 0;
-		sunRiseFlag = true;
+			sunHeight = 0;
+			sunRiseFlag = true;
 		}
 
 		light.position.set(50,sunHeight,50);

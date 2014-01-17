@@ -11,13 +11,13 @@ var VirtualJoystick	= function(opts)
 	this._baseY		= this._stickY = opts.baseY || 0
 	this._limitStickTravel	= opts.limitStickTravel || false
 	this._stickRadius	= opts.stickRadius !== undefined ? opts.stickRadius : 100
+	this._useCssTransform	= opts.useCssTransform !== undefined ? opts.useCssTransform : false
 
 	this._container.style.position	= "relative"
 
 	this._container.appendChild(this._baseEl)
 	this._baseEl.style.position	= "absolute"
 	this._baseEl.style.display	= "none"
-	
 	this._container.appendChild(this._stickEl)
 	this._stickEl.style.position	= "absolute"
 	this._stickEl.style.display	= "none"
@@ -31,9 +31,8 @@ var VirtualJoystick	= function(opts)
 		this._baseEl.style.top		= (this._baseY - this._baseEl.height/2)+"px";
 	}
     
-	this._transform = (opts.useCssTransform !== undefined ? opts.useCssTransform : true) ? this._getTransformProperty() : false;
-	this._has3d = this._check3D();
-	
+	this._transform	= this._useCssTransform ? this._getTransformProperty() : false;
+	this._has3d	= this._check3D();
 	
 	var __bind	= function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 	this._$onTouchStart	= __bind(this._onTouchStart	, this);
@@ -186,7 +185,7 @@ VirtualJoystick.prototype._onDown	= function(x, y)
 	}
 	
 	this._stickEl.style.display	= "";
-    this._move(this._stickEl.style, (this._stickX - this._stickEl.width /2), (this._stickY - this._stickEl.height/2));	
+	this._move(this._stickEl.style, (this._stickX - this._stickEl.width /2), (this._stickY - this._stickEl.height/2));	
 }
 
 VirtualJoystick.prototype._onMove	= function(x, y)
@@ -369,8 +368,8 @@ VirtualJoystick.prototype._move = function(style, x, y)
       style[this._transform] = 'translate(' + x + 'px,' + y + 'px)';
     }
   } else {
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
+    style.left = x + 'px';
+    style.top = y + 'px';
   }
 }
 

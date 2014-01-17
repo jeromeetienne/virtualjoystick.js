@@ -7,6 +7,8 @@
 	var joystick	= new VirtualJoystick({
 		container	: document.body,
 		strokeStyle	: 'cyan',
+		limitStickTravel: true,
+		stickRadius	: 120		
 	});
 	joystick.addEventListener('touchStartValidation', function(event){
 		var touch	= event.changedTouches[0];
@@ -27,7 +29,7 @@
 		return true
 	});
 	joystick.addEventListener('touchStart', function(){
-		console.log('down')
+		console.log('fire')
 	})
 </script></body>
 </html>
