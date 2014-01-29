@@ -165,7 +165,7 @@ VirtualJoystick.prototype._onUp	= function()
 
 VirtualJoystick.prototype._onDown	= function(x, y)
 {
-	if ( this._limitToContainer ) {
+	if ( this._limitToRegion ) {
 	 if ( x < this._aregionX || x > this._aregionX+this._aregionW 
 	   || y < this._aregionY || y > this._aregionY+this._aregionH ) {
 	  this._pressed = false;
