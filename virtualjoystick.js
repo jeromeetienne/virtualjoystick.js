@@ -7,20 +7,25 @@ var VirtualJoystick	= function(opts)
 	this._baseEl		= opts.baseElement	|| this._buildJoystickBase();
 	this._mouseSupport	= opts.mouseSupport !== undefined ? opts.mouseSupport : false;
 	this._stationaryBase	= opts.stationaryBase || false;
-	this._baseX		= this._stickX = opts.baseX || 0
-	this._baseY		= this._stickY = opts.baseY || 0
-	this._limitStickTravel	= opts.limitStickTravel || false
-	this._stickRadius	= opts.stickRadius !== undefined ? opts.stickRadius : 100
-	this._useCssTransform	= opts.useCssTransform !== undefined ? opts.useCssTransform : false
+	this._limitToRegion  	= opts.limitToRegion || false;
+	this._baseX		= this._stickX = opts.baseX || 0;
+	this._baseY		= this._stickY = opts.baseY || 0;
+	this._aregionX		= opts.aRegionX;
+	this._aregionY		= opts.aRegionY;
+	this._aregionW		= opts.aRegionW;
+	this._aregionH		= opts.aRegionH;
+	this._limitStickTravel	= opts.limitStickTravel || false;
+	this._stickRadius	= opts.stickRadius !== undefined ? opts.stickRadius : 100;
+	this._useCssTransform	= opts.useCssTransform !== undefined ? opts.useCssTransform : false;
 
-	this._container.style.position	= "relative"
+	this._container.style.position	= "relative";
 
-	this._container.appendChild(this._baseEl)
-	this._baseEl.style.position	= "absolute"
-	this._baseEl.style.display	= "none"
-	this._container.appendChild(this._stickEl)
-	this._stickEl.style.position	= "absolute"
-	this._stickEl.style.display	= "none"
+	this._container.appendChild(this._baseEl);
+	this._baseEl.style.position	= "absolute";
+	this._baseEl.style.display	= "none";
+	this._container.appendChild(this._stickEl);
+	this._stickEl.style.position	= "absolute";
+	this._stickEl.style.display	= "none";
 
 	this._pressed	= false;
 	this._touchIdx	= null;
@@ -160,6 +165,13 @@ VirtualJoystick.prototype._onUp	= function()
 
 VirtualJoystick.prototype._onDown	= function(x, y)
 {
+	if ( this._limitToContainer ) {
+	 if ( x < this._aregionX || x > this._aregionX+this._aregionW 
+	   || y < this._aregionY || y > this._aregionY+this._aregionH ) {
+	  this._pressed = false;
+ 	  return;
+	 }
+	}
 	this._pressed	= true; 
 	if(this._stationaryBase == false){
 		this._baseX	= x;
