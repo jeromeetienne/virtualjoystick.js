@@ -361,60 +361,59 @@ VirtualJoystick.prototype._buildJoystickStick	= function()
 
 VirtualJoystick.prototype._move = function(style, x, y)
 {
-  if (this._transform) {
-    if (this._has3d) {
-      style[this._transform] = 'translate3d(' + x + 'px,' + y + 'px, 0)';
-    } else {
-      style[this._transform] = 'translate(' + x + 'px,' + y + 'px)';
-    }
-  } else {
-    style.left = x + 'px';
-    style.top = y + 'px';
-  }
+	if (this._transform) {
+		if (this._has3d) {
+			style[this._transform] = 'translate3d(' + x + 'px,' + y + 'px, 0)';
+		} else {
+			style[this._transform] = 'translate(' + x + 'px,' + y + 'px)';
+		}
+	} else {
+		style.left = x + 'px';
+		style.top = y + 'px';
+	}
 }
 
 VirtualJoystick.prototype._getTransformProperty = function() 
 {
-    var styles = [
-      'webkitTransform',
-      'MozTransform',
-      'msTransform',
-      'OTransform',
-      'transform'
-    ];
-    
-    var el = document.createElement('p');
-    var style;
-    
-    for (var i = 0; i < styles.length; i++) {
-      style = styles[i];
-      if (null != el.style[style]) {
-        return style;
-        break;
-      }
-    }         
+	var styles = [
+		'webkitTransform',
+		'MozTransform',
+		'msTransform',
+		'OTransform',
+		'transform'
+	];
+
+	var el = document.createElement('p');
+	var style;
+
+	for (var i = 0; i < styles.length; i++) {
+		style = styles[i];
+		if (null != el.style[style]) {
+			return style;
+		}
+	}         
 }
   
 VirtualJoystick.prototype._check3D = function() 
 {        
-    var prop = this._getTransformProperty();
-    // IE8<= doesn't have `getComputedStyle`
-    if (!prop || !window.getComputedStyle) return module.exports = false;
-    
-    var map = {
-      webkitTransform: '-webkit-transform',
-      OTransform: '-o-transform',
-      msTransform: '-ms-transform',
-      MozTransform: '-moz-transform',
-      transform: 'transform'
-    };
-    
-    // from: https://gist.github.com/lorenzopolidori/3794226
-    var el = document.createElement('div');
-    el.style[prop] = 'translate3d(1px,1px,1px)';
-    document.body.insertBefore(el, null);
-    var val = getComputedStyle(el).getPropertyValue(map[prop]);
-    document.body.removeChild(el);
-    var exports = null != val && val.length && 'none' != val;
-    return exports;
+	var prop = this._getTransformProperty();
+	// IE8<= doesn't have `getComputedStyle`
+	if (!prop || !window.getComputedStyle) return module.exports = false;
+
+	var map = {
+		webkitTransform: '-webkit-transform',
+		OTransform: '-o-transform',
+		msTransform: '-ms-transform',
+		MozTransform: '-moz-transform',
+		transform: 'transform'
+	};
+
+	// from: https://gist.github.com/lorenzopolidori/3794226
+	var el = document.createElement('div');
+	el.style[prop] = 'translate3d(1px,1px,1px)';
+	document.body.insertBefore(el, null);
+	var val = getComputedStyle(el).getPropertyValue(map[prop]);
+	document.body.removeChild(el);
+	var exports = null != val && val.length && 'none' != val;
+	return exports;
 }
