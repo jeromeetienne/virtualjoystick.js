@@ -6,7 +6,12 @@ var VirtualJoystick	= function(opts)
 	this._stickEl		= opts.stickElement	|| this._buildJoystickStick();
 	this._baseEl		= opts.baseElement	|| this._buildJoystickBase();
 	this._mouseSupport	= opts.mouseSupport !== undefined ? opts.mouseSupport : false;
-	this._stationaryBase	= opts.stationaryBase || false;
+	this._limitedBase   = opts.limitedBase || false;
+    this._limitMaxX     = opts.limitMaxX || window.innerWidth;
+    this._limitMaxY     = opts.limitMaxY || window.innerHeight;
+    this._limitMinX     = opts.limitMinX || 0;
+    this._limitMinY     = opts.limitMinY || 0;
+    this._stationaryBase	= opts.stationaryBase || false;
 	this._baseX		= this._stickX = opts.baseX || 0
 	this._baseY		= this._stickY = opts.baseY || 0
 	this._limitStickTravel	= opts.limitStickTravel || false
@@ -160,32 +165,36 @@ VirtualJoystick.prototype._onUp	= function()
 
 VirtualJoystick.prototype._onDown	= function(x, y)
 {
-	this._pressed	= true; 
-	if(this._stationaryBase == false){
-		this._baseX	= x;
-		this._baseY	= y;
-		this._baseEl.style.display	= "";
-		this._move(this._baseEl.style, (this._baseX - this._baseEl.width /2), (this._baseY - this._baseEl.height/2));
-	}
-	
-	this._stickX	= x;
-	this._stickY	= y;
-	
-	if(this._limitStickTravel === true){
-		var deltaX	= this.deltaX();
-		var deltaY	= this.deltaY();
-		var stickDistance = Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY) );
-		if(stickDistance > this._stickRadius){
-			var stickNormalizedX = deltaX / stickDistance;
-			var stickNormalizedY = deltaY / stickDistance;
-			
-			this._stickX = stickNormalizedX * this._stickRadius + this._baseX;
-			this._stickY = stickNormalizedY * this._stickRadius + this._baseY;
-		} 	
-	}
-	
-	this._stickEl.style.display	= "";
-	this._move(this._stickEl.style, (this._stickX - this._stickEl.width /2), (this._stickY - this._stickEl.height/2));	
+    if(this._limitedBase == true && 
+       (x > this._limitMaxX || x < this._limitMinX || y > this._limitMaxY || y < this._limitMinY))
+        return;
+        
+    this._pressed	= true; 
+    if(this._stationaryBase == false){
+        this._baseX	= x;
+        this._baseY	= y;
+        this._baseEl.style.display	= "";
+        this._move(this._baseEl.style, (this._baseX - this._baseEl.width /2), (this._baseY - this._baseEl.height/2));
+    }
+
+    this._stickX	= x;
+    this._stickY	= y;
+
+    if(this._limitStickTravel === true){
+        var deltaX	= this.deltaX();
+        var deltaY	= this.deltaY();
+        var stickDistance = Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY) );
+        if(stickDistance > this._stickRadius){
+            var stickNormalizedX = deltaX / stickDistance;
+            var stickNormalizedY = deltaY / stickDistance;
+
+            this._stickX = stickNormalizedX * this._stickRadius + this._baseX;
+            this._stickY = stickNormalizedY * this._stickRadius + this._baseY;
+        } 	
+    }
+
+    this._stickEl.style.display	= "";
+    this._move(this._stickEl.style, (this._stickX - this._stickEl.width /2), (this._stickY - this._stickEl.height/2));
 }
 
 VirtualJoystick.prototype._onMove	= function(x, y)
