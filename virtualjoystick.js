@@ -164,11 +164,7 @@ VirtualJoystick.prototype._onUp	= function()
 }
 
 VirtualJoystick.prototype._onDown	= function(x, y)
-{
-    if(this._limitedBase == true && 
-       (x > this._limitMaxX || x < this._limitMinX || y > this._limitMaxY || y < this._limitMinY))
-        return;
-        
+{        
     this._pressed	= true; 
     if(this._stationaryBase == false){
         this._baseX	= x;
@@ -235,6 +231,12 @@ VirtualJoystick.prototype._onMouseDown	= function(event)
 	event.preventDefault();
 	var x	= event.clientX;
 	var y	= event.clientY;
+    
+    // If it's outside the limit for this stick, just return
+    if(this._limitedBase == true && 
+       (x > this._limitMaxX || x < this._limitMinX || y > this._limitMaxY || y < this._limitMinY))
+        return;
+    
 	return this._onDown(x, y);
 }
 
@@ -257,19 +259,26 @@ VirtualJoystick.prototype._onTouchStart	= function(event)
 	// notify event for validation
 	var isValid	= this.dispatchEvent('touchStartValidation', event);
 	if( isValid === false )	return;
-	
+
 	// dispatch touchStart
 	this.dispatchEvent('touchStart', event);
 
 	event.preventDefault();
 	// get the first who changed
 	var touch	= event.changedTouches[0];
+    
+    // forward the action
+	var x		= touch.pageX;
+	var y		= touch.pageY;
+    
+    // If it's outside the limit for this stick, just return
+    if(this._limitedBase == true && 
+       (x > this._limitMaxX || x < this._limitMinX || y > this._limitMaxY || y < this._limitMinY))
+        return;
+    
 	// set the touchIdx of this joystick
 	this._touchIdx	= touch.identifier;
 
-	// forward the action
-	var x		= touch.pageX;
-	var y		= touch.pageY;
 	return this._onDown(x, y)
 }
 
@@ -407,7 +416,7 @@ VirtualJoystick.prototype._check3D = function()
 {        
 	var prop = this._getTransformProperty();
 	// IE8<= doesn't have `getComputedStyle`
-	if (!prop || !window.getComputedStyle) return module.exports = false;
+	if (!prop || !window.getComputedStyle) { module = module || {}; return module.exports = false; }
 
 	var map = {
 		webkitTransform: '-webkit-transform',
