@@ -3,6 +3,7 @@ var VirtualJoystick	= function(opts)
 	opts			= opts			|| {};
 	this._container		= opts.container	|| document.body;
 	this._strokeStyle	= opts.strokeStyle	|| 'cyan';
+	this._canvasRadius 	= 40
 	this._stickEl		= opts.stickElement	|| this._buildJoystickStick();
 	this._baseEl		= opts.baseElement	|| this._buildJoystickBase();
 	this._mouseSupport	= opts.mouseSupport !== undefined ? opts.mouseSupport : false;
@@ -138,6 +139,15 @@ VirtualJoystick.prototype.left	= function(){
 	var deltaY	= this.deltaY();
 	if( deltaX >= 0 )				return false;
 	if( Math.abs(deltaY) > 2*Math.abs(deltaX) )	return false;
+	return true;	
+}
+VirtualJoystick.prototype.center	= function(){
+	if( this._pressed === false )	return false;
+	var deltaX	= this.deltaX();
+	var deltaY	= this.deltaY();
+	if( this.baseX == 0 ) 			return false;
+	if( this.baseY == 0 ) 			return false;
+	if (Math.pow(this._stickX-this._baseX, 2)+Math.pow(this._stickY-this._baseY, 2)>Math.pow(this._canvasRadius, 2)) return false;		
 	return true;	
 }
 
@@ -325,13 +335,13 @@ VirtualJoystick.prototype._buildJoystickBase	= function()
 	ctx.beginPath(); 
 	ctx.strokeStyle = this._strokeStyle; 
 	ctx.lineWidth	= 6; 
-	ctx.arc( canvas.width/2, canvas.width/2, 40, 0, Math.PI*2, true); 
+	ctx.arc( canvas.width/2, canvas.width/2, this._canvasRadius, 0, Math.PI*2, true); 
 	ctx.stroke();	
 
 	ctx.beginPath(); 
 	ctx.strokeStyle	= this._strokeStyle; 
 	ctx.lineWidth	= 2; 
-	ctx.arc( canvas.width/2, canvas.width/2, 60, 0, Math.PI*2, true); 
+	ctx.arc( canvas.width/2, canvas.width/2, this._canvasRadius+20, 0, Math.PI*2, true); 
 	ctx.stroke();
 	
 	return canvas;
@@ -349,7 +359,7 @@ VirtualJoystick.prototype._buildJoystickStick	= function()
 	ctx.beginPath(); 
 	ctx.strokeStyle	= this._strokeStyle; 
 	ctx.lineWidth	= 6; 
-	ctx.arc( canvas.width/2, canvas.width/2, 40, 0, Math.PI*2, true); 
+	ctx.arc( canvas.width/2, canvas.width/2, this._canvasRadius, 0, Math.PI*2, true); 
 	ctx.stroke();
 	return canvas;
 }
