@@ -11,6 +11,7 @@ var VirtualJoystick	= function(opts)
 	this._baseY		= this._stickY = opts.baseY || 0
 	this._limitStickTravel	= opts.limitStickTravel || false
 	this._stickRadius	= opts.stickRadius !== undefined ? opts.stickRadius : 100
+	this._deadZone          = opts.deadZone || 0
 	this._useCssTransform	= opts.useCssTransform !== undefined ? opts.useCssTransform : false
 
 	this._container.style.position	= "relative"
@@ -114,6 +115,7 @@ VirtualJoystick.prototype.up	= function(){
 	var deltaY	= this.deltaY();
 	if( deltaY >= 0 )				return false;
 	if( Math.abs(deltaX) > 2*Math.abs(deltaY) )	return false;
+	if( (deltaY > -this._deadZone) && (deltaY < this._deadZone ))	return false;
 	return true;
 }
 VirtualJoystick.prototype.down	= function(){
@@ -122,6 +124,7 @@ VirtualJoystick.prototype.down	= function(){
 	var deltaY	= this.deltaY();
 	if( deltaY <= 0 )				return false;
 	if( Math.abs(deltaX) > 2*Math.abs(deltaY) )	return false;
+	if( (deltaY > -this._deadZone) && (deltaY < this._deadZone ))	return false;
 	return true;	
 }
 VirtualJoystick.prototype.right	= function(){
@@ -130,6 +133,7 @@ VirtualJoystick.prototype.right	= function(){
 	var deltaY	= this.deltaY();
 	if( deltaX <= 0 )				return false;
 	if( Math.abs(deltaY) > 2*Math.abs(deltaX) )	return false;
+	if( (deltaX > -this._deadZone) && (deltaX < this._deadZone ))	return false;
 	return true;	
 }
 VirtualJoystick.prototype.left	= function(){
@@ -138,6 +142,7 @@ VirtualJoystick.prototype.left	= function(){
 	var deltaY	= this.deltaY();
 	if( deltaX >= 0 )				return false;
 	if( Math.abs(deltaY) > 2*Math.abs(deltaX) )	return false;
+	if( (deltaX > -this._deadZone) && (deltaX < this._deadZone ))	return false;
 	return true;	
 }
 
