@@ -155,6 +155,9 @@ VirtualJoystick.prototype._onUp	= function()
 	
 		this._baseX	= this._baseY	= 0;
 		this._stickX	= this._stickY	= 0;
+	}else{
+		this._stickX	= this._baseX;
+		this._stickY	= this._baseY;
 	}
 }
 
