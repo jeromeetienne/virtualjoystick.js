@@ -107,6 +107,15 @@ VirtualJoystick.touchScreenAvailable	= function()
 
 VirtualJoystick.prototype.deltaX	= function(){ return this._stickX - this._baseX;	}
 VirtualJoystick.prototype.deltaY	= function(){ return this._stickY - this._baseY;	}
+VirtualJoystick.prototype.angle	= function(){ 
+	var dx = this._stickX - this._baseX;
+	var dy = this._stickY - this._baseY;
+	var theta = Math.atan2(dy, dx);
+	theta *= 180/Math.PI;
+	theta = -theta;
+	theta = (theta > 0 ? theta : (360 + theta));
+	return theta;	
+}
 
 VirtualJoystick.prototype.up	= function(){
 	if( this._pressed === false )	return false;
