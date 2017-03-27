@@ -62,11 +62,21 @@ VirtualJoystick.prototype._updatePositionOfContainer = function () {
     var x = 0, y = 0;
 
     var element = this._container;
-    while (element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
-        x += element.offsetLeft - element.scrollLeft;
-        y += element.offsetTop - element.scrollTop;
-        element = element.offsetParent;
-    }
+		if(this._stationaryBase === true){
+			while (element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
+					x += element.offsetLeft;
+					y += element.offsetTop;
+					element = element.offsetParent;
+			}
+		}
+		else {
+			while (element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
+					x += element.offsetLeft - element.scrollLeft;
+					y += element.offsetTop - element.scrollTop;
+					element = element.offsetParent;
+			}
+		}
+
     this._containerX = x;
     this._containerY = y;
 
