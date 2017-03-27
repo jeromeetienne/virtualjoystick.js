@@ -63,6 +63,7 @@ VirtualJoystick.prototype._updatePositionOfContainer = function () {
 
     var element = this._container;
 		if(this._stationaryBase === true){
+			this._UpdateBase()
 			while (element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
 					x += element.offsetLeft;
 					y += element.offsetTop;
@@ -76,11 +77,12 @@ VirtualJoystick.prototype._updatePositionOfContainer = function () {
 					element = element.offsetParent;
 			}
 		}
-
     this._containerX = x;
     this._containerY = y;
+}
 
-    console.log("updated x="+x+" y="+y)
+VirtualJoystick.prototype._UpdateBase = function(){
+	this._move(this._baseEl.style, (this._baseX - this._baseEl.width /2), (this._baseY - this._baseEl.height/2));
 }
 
 VirtualJoystick.prototype.destroy	= function()
